@@ -11,7 +11,6 @@ function ProductList() {
 
     const dispatch = useDispatch();
 
-
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -271,6 +270,10 @@ const handlePlantsClick = (e) => {
 
     return totalItems;
   }
+
+  const isAddedToCart = (item)=>{
+    return addedToCart[item.name]
+  }
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -306,7 +309,9 @@ const handlePlantsClick = (e) => {
                                     <img className='product-image' src={plant.image} alt="" />
                                     <p className="product-price">{plant.cost}</p>
                                     <p>{plant.description}</p>
-                                    <button className="product-button" onClick={()=> handleAddToCart(plant)}>Add to Cart</button>
+                                    <button className={ isAddedToCart(plant) ? 'product-button added-to-cart' : 'product-button' } disabled ={isAddedToCart(plant)} onClick={()=> handleAddToCart(plant)}>
+                                        {isAddedToCart(plant) ? 'Added to Cart' : 'Add to Cart'}
+                                    </button>
                                 </div>
                             ))
                             }
